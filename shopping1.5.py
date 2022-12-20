@@ -1,9 +1,7 @@
 print("Welcome to fancy shopping mall")
 customerTotal = 0
-terminate = False
 Next = True
 cust_items = ""
-
 
 itemsList = {
     "lamp": 39.99,
@@ -97,23 +95,32 @@ while Next is True:
     if exito == "y": #repeats the ask loop
         Next = True
 
+def checkoutInfo(customerTotal, rebate):
+    print("The items you will be buying today are: " + cust_items)
+    print("your subtotal is: $"+ (format( customerTotal , ".2f")) )
+
+    if rebate == 0:
+        #calculate tax
+        custTotal = custTotal * 1.08
+        endo = (format(custTotal, ".2f"))
+
+    elif rebate == 1:
+        #discount
+        print("You will receive a 5% discount on your subtotal today")
+        customerTotal = customerTotal / 1.05
+        customerTotale = (format( customerTotal , ".2f")) 
+        print("your subtotal after discount is: $"+ str(customerTotale))
+        #calculate tax
+        customerTotal = customerTotal * 1.08
+        endo = (format(customerTotal, ".2f"))
+    print("Your total after tax is : $" + str(endo))
+        
 # Total
 if Next is False:
     if customerTotal > 200:
-        print("The items you will be buying today are: " + cust_items)
-        print("your subtotal is:"+ str(customerTotal))
-        print("You will receive a %5 discount on your subtotal today")
-        customerRebate = customerTotal / 1.05
-        customerTotal = customerRebate
-        tax = customerTotal * 0.08
-        customerTotal = customerTotal + tax
-        endo = (format(customerTotal, ".2f"))
-        print("Your total after tax is: $" + str(endo))
+        rebateEligible = 1
+        checkoutInfo(customerTotal , rebateEligible )
 
     elif customerTotal < 200:
-        print("The items you will be buying today are: " + cust_items)
-        print("subtotal:" + str(customerTotal))
-        tax = customerTotal * 0.08
-        customerTotal = customerTotal + tax
-        endo = (format(customerTotal, ".2f"))
-        print("Your total after tax is : $" + str(endo))
+        rebateEligible = 0
+        checkoutInfo(customerTotal , rebateEligible )
